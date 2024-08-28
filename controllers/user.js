@@ -1,6 +1,6 @@
 const User = require("../modules/users");
 const token = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -10,7 +10,7 @@ const login = async (req, res, next) => {
         message: "User Not Found",
       });
     } else {
-      const isCorrectPass = bcrypt.compareSync(
+      const isCorrectPass = await bcrypt.compare(
         req.body.password,
         user.password
       );
@@ -51,7 +51,7 @@ const register = async (req, res, next) => {
   try {
     const oldPassword = req.body.password;
 
-    const newPassword = bcrypt.hashSync(oldPassword, 12);
+    const newPassword = await bcrypt.hash(oldPassword, 12);
 
     const newUser = new User({
       name: req.body.name,
