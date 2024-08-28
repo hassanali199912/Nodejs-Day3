@@ -11,6 +11,9 @@ const todoRoutes = require("./routes/todos");
 const userRoutes = require("./routes/user");
 app.use("/todos", todoRoutes);
 app.use("/user", userRoutes);
+app.use("/", () => {
+  res.send("Hello it is working ❤️❤️");
+});
 
 mongoose
   .connect(DB)
