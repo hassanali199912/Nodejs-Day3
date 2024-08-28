@@ -11,8 +11,15 @@ const todoRoutes = require("./routes/todos");
 const userRoutes = require("./routes/user");
 app.use("/todos", todoRoutes);
 app.use("/user", userRoutes);
-app.get("/", (req,res) => {
-  res.send("Hello it is working ❤️❤️");
+app.get("/", (req, res) => {
+  res.json({
+    wellecome: "Hello it is working ❤️❤️",
+    auther: {
+      name: "Hassan ali ",
+      email: "hassanalihassan1203@gmail.com",
+      protfilo_link: "https://hassanali199912.github.io/My-Second-Portfolio/",
+    },
+  });
 });
 
 mongoose
